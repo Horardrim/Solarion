@@ -16,7 +16,7 @@ jobs:
           node-version: '18.20.8'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm cache clean --force && npm ci
 
       - name: Checkout Repository
         uses: actions/checkout@v4
