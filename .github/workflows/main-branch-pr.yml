@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '22.15.0'
+          node-version: '18.20.8'
 
       - name: Install Dependencies
         run: npm ci
