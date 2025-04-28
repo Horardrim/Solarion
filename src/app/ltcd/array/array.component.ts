@@ -14,10 +14,11 @@ import * as Highcharts from 'highcharts';
 export class ArrayComponent implements AfterViewInit {
     @ViewChild('chartContainer') chartContainer!: ElementRef;
 
+    chart: Highcharts.Chart | undefined;
+
     ngAfterViewInit(): void {
-        setTimeout(() => {
-          this.initChart();
-        }, 0);
+        this.initChart();
+        this.startUpdatingChart();
     }
 
     initChart(): void {
@@ -51,6 +52,16 @@ export class ArrayComponent implements AfterViewInit {
       };
   
       // 创建图表
-      Highcharts.chart(this.chartContainer.nativeElement, chartOptions);
+      this.chart = Highcharts.chart(this.chartContainer.nativeElement, chartOptions);
+    }
+
+    startUpdatingChart(): void {
+      setInterval(() => {
+        const series = this.chart!.series[0];
+        if (series) {
+          const newData = series.data.map(() => Math.floor(Math.random() * 50));
+          series.setData(newData);
+        }
+      }, 1000);    
     }
 }
